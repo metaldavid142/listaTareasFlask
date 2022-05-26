@@ -35,7 +35,7 @@ def enviar():
             return redirect(url_for('principal'))
         
         else:
-            flash('Tarea agregada exitosamente!')
+            flash('¡Tarea agregada exitosamente!')
             lista_tareas.append({'tarea': tarea, 'correo_electronico': correo_electronico, 'prioridad': prioridad})
             return redirect(url_for('principal'))
         
