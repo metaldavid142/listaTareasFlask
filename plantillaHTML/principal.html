@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <title>Lista de tareas con Flask</title>
+</head>
+
+<body>
+
+    {% for message in get_flashed_messages() %}
+    <h2 class="text-center text-warning">{{ message }}</h2>
+    {% endfor %}
+
+    <h1>Prueba tareas</h1>
+
+    <!--Primer controlador: lista actual de tareas pendientes-->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Tarea</th>
+                <th scope="col">Correo electrónico</th>
+                <th scope="col">Prioridad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Ciclo for para acceder a la lista de tareas-->
+            {% for listaTareas in lista_tareas %}
+
+            <tr>
+                <!--Mostrar la descripcion de la tarea-->
+                <th>{{listaTareas.tarea}}</th>
+                <!--Mostrar correo de la tarea-->
+                <th>{{listaTareas.correo_electronico}}</th>
+                <!--Mostrar prioridad de la tarea-->
+                <th>{{listaTareas.prioridad}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!--Primer controlador: formulario para enviar un nuevo elemento-->
+    <form method="post" action="{{url_for('enviar')}}">
+        <div class="form-group">
+            <label>TAREA A REALIZAR:</label>
+            <input type="text" class="form-control" placeholder="Preparar...."
+                name="tarea">
+        </div>
+        <div class="form-group">
+            <label>CORREO ELECTRÓNICO:</label>
+            <input type="email" class="form-control" placeholder="ejemplo@mail.com" name="correo_electronico">
+        </div>
+        <div class="form-group">
+            <label>PRIORIDAD</label>
+            <select class="form-control" name="prioridad">
+                <option value="1">Bajo</option>
+                <option value="2">Medio</option>
+                <option value="3">Alto</option>
+            </select>
+        </div>
+        <input type="submit">
+    </form> 
+
+    <form action="{{url_for('borrar')}}" method="post" class="card-body">
+        <button type="submit" class="btn btn-danger mb-2">Borrar</button>
+
+    </form>
+</body>
+</html>

@@ -38,7 +38,7 @@ def enviar():
             flash('Tarea agregada exitosamente!')
             lista_tareas.append({'tarea': tarea, 'correo_electronico': correo_electronico, 'prioridad': prioridad})
             return redirect(url_for('principal'))
-
+        
 #Tercer Controlador: Limpiar la Lista
 @app.route('/borrar', methods=['POST'])
 def borrar():
